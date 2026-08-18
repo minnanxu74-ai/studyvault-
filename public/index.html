@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StudyVault — Master Math, English & Coding</title>
+<title>StudyVault — Learn, Level Up, Explore</title>
 <style>
 :root{
   --ink:#182230; --muted:#667085; --bg:#f6f8fc; --card:#fff; --line:#e7ebf2;
@@ -138,10 +138,46 @@ footer{text-align:center;color:#98a2b3;font-size:12px;margin-top:35px}
 #topSignInButton{margin-left:auto;margin-right:8px}
 @media(max-width:900px){#topSignInButton{margin-left:0}}
 
+
+/* StudyVault master visual system */
+body{transition:background .35s ease} body.plan-free{background:#dff3ff} body.plan-plus{background:#b9dcff} body.plan-pro{background:#7fb6ee} body.plan-max{background:#05070b;color:#f5f7fa} body.plan-max .panel,body.plan-max .subject,body.plan-max .profile,body.plan-max .quiz,body.plan-max .plan-card{background:rgba(20,24,32,.78);color:#f5f7fa;border-color:rgba(255,255,255,.12)}
+.panel,.subject,.plan-card,.profile,.quiz{backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);background:rgba(255,255,255,.78)}
+.subjects.all-subjects{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
 </style>
 </head>
 <body>
 
+<script>
+window.studyVaultSubscriptionPricing = {
+  plus: {
+    name: "StudyVault Plus",
+    price: 50.00,
+    period: "year"
+  },
+  pro: {
+    name: "StudyVault Pro",
+    price: 75.00,
+    period: "year"
+  },
+  max: {
+    name: "StudyVault Max",
+    price: 125.00,
+    period: "year"
+  },
+  domain: {
+    name: "StudyVault Domain",
+    price: 200.00,
+    period: "year",
+    features: ["All StudyVault Pro features", "Domain Features"]
+  },
+  domainPlus: {
+    name: "StudyVault Domain Plus",
+    price: 250.00,
+    period: "year",
+    features: ["All StudyVault Max features", "Domain Plus Features"]
+  }
+};
+</script>
 <script>
 (function(){
   function modal(id, show){
@@ -254,10 +290,18 @@ footer{text-align:center;color:#98a2b3;font-size:12px;margin-top:35px}
     <div class="logo">Study<span>Vault</span></div>
     <nav class="nav">
       <button class="active" onclick="showSection('home',this)">🏠 Home</button>
+      <button onclick="showSection('languages',this)">🌐 Languages</button>
       <button onclick="showSection('math',this)">➗ Math</button>
-      <button onclick="showSection('english',this)">📚 English</button>
       <button onclick="showSection('coding',this)">💻 Coding</button>
-      <button id="historyNav" onclick="showSection('history',this)">🌎 History</button><button onclick="showSection('subscriptions',this)">💳 Plans</button>
+      <button onclick="showSection('socialStudies',this)">🌎 Social Studies</button>
+      <button onclick="showSection('science',this)">🔬 Science</button>
+      <button onclick="showSection('art',this)">🎨 Art</button>
+      <button onclick="showSection('music',this)">🎵 Music</button>
+      <button onclick="showSection('financial',this)">💰 Financial Literacy</button>
+      <button onclick="showSection('psychology',this)">🧠 Psychology</button>
+      <button onclick="showSection('environment',this)">🌱 Environmental Science</button>
+      <button onclick="showSection('civics',this)">⚖️ Civics & Government</button>
+      <button onclick="showSection('subscriptions',this)">💳 Plans</button>
       <button onclick="showSection('progress',this)">📈 Progress</button>
     </nav>
     <div class="side-note">🌱 Start small. Practice every day. Build real skills.</div>
@@ -285,8 +329,19 @@ footer{text-align:center;color:#98a2b3;font-size:12px;margin-top:35px}
       </div>
 
       <div class="section-head" id="subjects"><h3>Choose your learning path</h3><span>Start at Level 1</span></div>
-      <div class="subjects">
-        <article class="subject math"><div class="subject-icon">➗</div><h4>Math Foundations</h4><p>A complete K–12 pathway from counting and basic operations to algebra, geometry, trigonometry, and calculus.</p><div class="progress"><i></i></div><div class="meta"><span>K–12 Pathway</span><span>K–12</span></div></article>
+      <div class="subjects all-subjects">
+        <article class="subject"><div class="subject-icon">🌐</div><h4>Languages</h4><p>English, French, Spanish, Mandarin, German, Japanese, Italian and Korean.</p><button class="shop-button" onclick="showSection('languages',document.querySelector('.nav button:nth-child(2)'))">Open Languages →</button></article>
+        <article class="subject math"><div class="subject-icon">➗</div><h4>Math</h4><p>Simple Math, Algebra and Advanced Math across K–12.</p></article>
+        <article class="subject coding"><div class="subject-icon">&lt;/&gt;</div><h4>Coding</h4><p>Computational thinking, programming, web development and computer science.</p></article>
+        <article class="subject"><div class="subject-icon">🌎</div><h4>Social Studies</h4><p>Canada History, U.S. History, World History, World War I, World War II and Titanic Disaster.</p></article>
+        <article class="subject"><div class="subject-icon">🔬</div><h4>Science</h4><p>Biotic Elements, Abiotic Elements, Periodic Table and Space Science.</p></article>
+        <article class="subject"><div class="subject-icon">🎨</div><h4>Art</h4><p>Drawing, Painting, Art History, Design and Digital Art.</p></article>
+        <article class="subject"><div class="subject-icon">🎵</div><h4>Music</h4><p>Music Theory, Instruments, Rhythm, Composition and Music History.</p></article>
+        <article class="subject"><div class="subject-icon">💰</div><h4>Financial Literacy</h4><p>Saving, budgeting, banking, investing basics, taxes, credit, debt and personal finance.</p></article>
+        <article class="subject"><div class="subject-icon">🧠</div><h4>Psychology</h4><p>Human behavior, emotions, memory, learning, social psychology and the brain.</p></article>
+        <article class="subject"><div class="subject-icon">🌱</div><h4>Environmental Science</h4><p>Ecosystems, climate, conservation, renewable energy and pollution.</p></article>
+        <article class="subject"><div class="subject-icon">⚖️</div><h4>Civics & Government</h4><p>Government, elections, rights, responsibilities, Canadian and U.S. government and law basics.</p></article>
+      </div><h4>Math Foundations</h4><p>A complete K–12 pathway from counting and basic operations to algebra, geometry, trigonometry, and calculus.</p><div class="progress"><i></i></div><div class="meta"><span>K–12 Pathway</span><span>K–12</span></div></article>
         <article class="subject english"><div class="subject-icon">Aa</div><h4>English Foundations</h4><p>A complete K–12 pathway from phonics and basic vocabulary to reading, writing, grammar, literature, and advanced communication.</p><div class="progress"><i></i></div><div class="meta"><span>K–12 Pathway</span><span>K–12</span></div></article>
         <article class="subject coding"><div class="subject-icon">&lt;/&gt;</div><h4>Coding Foundations</h4><p>A complete K–12 pathway from digital literacy and logic to programming, web development, data, algorithms, and computer science.</p><div class="progress"><i></i></div><div class="meta"><span>K–12 Pathway</span><span>K–12</span></div></article>
       
@@ -333,6 +388,24 @@ footer{text-align:center;color:#98a2b3;font-size:12px;margin-top:35px}
 
 
 
+<section id="languages" hidden><div class="panel"><h2>🌐 Languages</h2><p>Choose a language, then choose what you want to learn.</p><div class="subjects all-subjects">
+<article class="subject"><h4>🇺🇸 English</h4><p>Spelling · Grammar · Writing · Language Arts · Vocabulary</p><button class="shop-button" onclick="openLanguage('English')">Choose English →</button></article>
+<article class="subject"><h4>🇫🇷 French</h4><p>Spelling · Grammar · Writing · Language Arts · Vocabulary</p><button class="shop-button" onclick="openLanguage('French')">Choose French →</button></article>
+<article class="subject"><h4>🇪🇸 Spanish</h4><p>Choose what you want to learn.</p><button class="shop-button" onclick="openLanguage('Spanish')">Choose Spanish →</button></article>
+<article class="subject"><h4>🇨🇳 Mandarin</h4><p>Choose what you want to learn.</p><button class="shop-button" onclick="openLanguage('Mandarin')">Choose Mandarin →</button></article>
+<article class="subject"><h4>🇩🇪 German</h4><p>Choose what you want to learn.</p><button class="shop-button" onclick="openLanguage('German')">Choose German →</button></article>
+<article class="subject"><h4>🇯🇵 Japanese</h4><p>Choose what you want to learn.</p><button class="shop-button" onclick="openLanguage('Japanese')">Choose Japanese →</button></article>
+<article class="subject"><h4>🇮🇹 Italian</h4><p>Choose what you want to learn.</p><button class="shop-button" onclick="openLanguage('Italian')">Choose Italian →</button></article>
+<article class="subject"><h4>🇰🇷 Korean</h4><p>Choose what you want to learn.</p><button class="shop-button" onclick="openLanguage('Korean')">Choose Korean →</button></article>
+</div><div id="languageCategories" class="panel" hidden><h3 id="languageCategoryTitle">Choose what you want to learn</h3><div class="subjects all-subjects" id="languageCategoryCards"></div></div></div></section>
+<section id="socialStudies" hidden><div class="panel"><h2>🌎 Social Studies</h2><p>Choose what you want to learn.</p><div class="subjects all-subjects"><article class="subject"><h4>Canada History</h4><button class="shop-button" onclick="openTopic('Social Studies','Canada History')">Learn →</button></article><article class="subject"><h4>U.S. History</h4><button class="shop-button" onclick="openTopic('Social Studies','U.S. History')">Learn →</button></article><article class="subject"><h4>World History</h4><button class="shop-button" onclick="openTopic('Social Studies','World History')">Learn →</button></article><article class="subject"><h4>World War I</h4><button class="shop-button" onclick="openTopic('Social Studies','World War I')">Learn →</button></article><article class="subject"><h4>World War II</h4><button class="shop-button" onclick="openTopic('Social Studies','World War II')">Learn →</button></article><article class="subject"><h4>Titanic Disaster</h4><button class="shop-button" onclick="openTopic('Social Studies','Titanic Disaster')">Learn →</button></article></div></div></section>
+<section id="science" hidden><div class="panel"><h2>🔬 Science</h2><p>Choose what you want to learn.</p><div class="subjects all-subjects"><article class="subject"><h4>Biotic Elements</h4><button class="shop-button" onclick="openTopic('Science','Biotic Elements')">Learn →</button></article><article class="subject"><h4>Abiotic Elements</h4><button class="shop-button" onclick="openTopic('Science','Abiotic Elements')">Learn →</button></article><article class="subject"><h4>Periodic Table</h4><button class="shop-button" onclick="openTopic('Science','Periodic Table')">Learn →</button></article><article class="subject"><h4>Space Science</h4><button class="shop-button" onclick="openTopic('Science','Space Science')">Learn →</button></article></div></div></section>
+<section id="art" hidden><div class="panel"><h2>🎨 Art</h2><p>Drawing · Painting · Art History · Design · Digital Art</p></div></section>
+<section id="music" hidden><div class="panel"><h2>🎵 Music</h2><p>Music Theory · Instruments · Rhythm · Composition · Music History</p></div></section>
+<section id="financial" hidden><div class="panel"><h2>💰 Financial Literacy</h2><p>Saving & Budgeting · Banking · Investing Basics · Taxes · Credit & Debt · Personal Finance</p></div></section>
+<section id="psychology" hidden><div class="panel"><h2>🧠 Psychology</h2><p>Human Behavior · Emotions · Memory & Learning · Social Psychology · Brain & Mind</p></div></section>
+<section id="environment" hidden><div class="panel"><h2>🌱 Environmental Science</h2><p>Ecosystems · Climate · Conservation · Renewable Energy · Pollution</p></div></section>
+<section id="civics" hidden><div class="panel"><h2>⚖️ Civics & Government</h2><p>Government · Elections · Rights & Responsibilities · Canadian Government · U.S. Government · Law Basics</p></div></section>
 <section id="questionsPage" hidden>
   <div class="panel">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
@@ -356,12 +429,12 @@ footer{text-align:center;color:#98a2b3;font-size:12px;margin-top:35px}
     <h2>💳 StudyVault Subscriptions</h2>
     <p>Choose the plan that fits your learning journey.</p>
     <div class="subscription-grid">
-      <article class="plan-card"><h3>🆓 <span class="plan-name">Free</span></h3><p class="plan-price">10 questions per day</p><ul><li>Math, English & Coding</li><li>Regular energy system</li><li>10 💎 gems per completed lesson</li><li>Daily question limit resets each day</li></ul></article>
-      <article class="plan-card"><h3>⭐ <span class="plan-name">StudyVault Plus</span></h3><p class="plan-price">Unlimited Learning</p><ul><li>Unlimited Learning</li><li>All 3 subjects unlocked</li><li>Regular energy system</li></ul></article>
-      <article class="plan-card"><h3>🚀 <span class="plan-name">StudyVault Pro</span></h3><p class="plan-price">Advanced learning</p><ul><li>Unlimited Energy</li><li>Unlimited Learning</li><li>Free Legendary Levels (normally 500 💎)</li><li>All 3 subjects unlocked</li><li>Explain This Question — Powered by ChatGPT</li></ul></article>
-      <article class="plan-card"><h3>👑 <span class="plan-name">StudyVault Max</span></h3><p class="plan-price">Ultimate learner plan</p><ul><li>Unlimited Energy</li><li>Unlimited Learning</li><li>Personalized Learning</li><li>Free Legendary Levels</li><li>Roleplay</li><li>Free Exercises (normally 1,000 💎)</li><li>100 💎 every 7 days</li><li>Explain This Question Plus — Powered by ChatGPT</li></ul></article>
-      <article class="plan-card"><h3>🏢 <span class="plan-name">StudyVault Domain</span></h3><p class="plan-price">Domain Owner</p><ul><li>Protected Administrator access</li><li>Requires Domain Key</li><li>Username: Administrator</li></ul></article>
-      <article class="plan-card"><h3>🏢👑 <span class="plan-name">StudyVault Domain +</span></h3><p class="plan-price">Premium Domain Owner</p><ul><li>Everything in Domain</li><li>Advanced creator features</li><li>Administrator tools</li></ul></article>
+      <article class="plan-card"><h3>🆓 StudyVault Free</h3><p class="plan-price">Free</p><ul><li>Light blue background</li><li>Core learning</li><li>10 free questions per day</li><li>EXP, Gems, Energy and Streaks</li></ul></article>
+      <article class="plan-card"><h3>💙 StudyVault Plus</h3><p class="plan-price">$50.00/year</p><ul><li>Blue background</li><li>Unlimited learning</li><li>More learning features</li></ul></article>
+      <article class="plan-card"><h3>🔵 StudyVault Pro</h3><p class="plan-price">$75.00/year</p><ul><li>Slightly darker blue background</li><li>Everything in Plus</li><li>All Fun Features unlocked</li><li>StudyVault World</li><li>Avatars & Pets</li><li>Boss Lessons, Daily Chest & Daily Spin</li><li>Ranks, Combos, Celebrations & Themes</li></ul></article>
+      <article class="plan-card"><h3>🖤 StudyVault Max</h3><p class="plan-price">$125.00/year</p><ul><li>Black background</li><li>Everything in Pro</li><li>Higher-level progression features</li><li>Advanced learning and game systems</li></ul></article>
+      <article class="plan-card"><h3>🌐 StudyVault Domain</h3><p class="plan-price">$200.00/year</p><ul><li>All StudyVault Pro features</li><li>Domain Features</li></ul></article>
+      <article class="plan-card"><h3>🌐✨ StudyVault Domain Plus</h3><p class="plan-price">$250.00/year</p><ul><li>All StudyVault Max features</li><li>Domain Plus Features</li></ul></article>
     </div>
   </div>
 </section>
@@ -518,8 +591,12 @@ function renderLevels(subject, targetId){
     </article>`).join("");
 }
 function openLevel(subject,grade){
-  const data=curriculum[subject][grade];
-  alert(`${subject[0].toUpperCase()+subject.slice(1)} — ${grade==="K"?"Kindergarten":"Grade "+grade}\\n\\n${data[0]}\\n${data[1]}\\n\\nNext: lessons, practice questions, quizzes and projects.`);
+  if(typeof window.openStudyQuestions === "function"){
+    window.openStudyQuestions(subject, grade);
+  } else {
+    const params = new URLSearchParams({subject:String(subject), level:String(grade)});
+    history.pushState({}, "", "/questions?" + params.toString());
+  }
 }
 renderLevels("math","mathLevels");
 renderLevels("english","englishLevels");
@@ -786,6 +863,7 @@ function isUnlimitedEnergy(){
 function setPlan(plan){
   localStorage.setItem("studyVaultPlan",plan);
   updatePlanUI();
+  if(window.updateStudyVaultBackground) window.updateStudyVaultBackground();
 }
 function updatePlanUI(){
   const plan=getPlan();
@@ -971,7 +1049,8 @@ function answer(el,correct){
   el.classList.add(correct?'correct':'wrong');
 
   if(correct){
-    document.getElementById('result').textContent='🎉 Correct! Great job.';
+    const reward=window.awardExp?window.awardExp(10):{earned:10,converted:0};
+    document.getElementById('result').textContent='🎉 Correct! +'+reward.earned+' EXP'+(reward.converted?' • +'+(reward.converted*10)+' Gems':'');
   }else{
     if(!isUnlimitedEnergy()){
       const next=Math.max(0,energy-1);
@@ -1130,5 +1209,59 @@ function startLesson(msg){document.getElementById('lessonMsg').textContent='✓ 
 })();
 </script>
 
+
+<script>
+(function(){
+  const languageCategories={
+    English:["Spelling","Grammar","Writing","Language Arts","Vocabulary"],
+    French:["Spelling","Grammar","Writing","Language Arts","Vocabulary"],
+    Spanish:["Spelling","Grammar","Writing","Language Arts","Vocabulary"],
+    Mandarin:["Spelling","Grammar","Writing","Language Arts","Vocabulary"],
+    German:["Spelling","Grammar","Writing","Language Arts","Vocabulary"],
+    Japanese:["Spelling","Grammar","Writing","Language Arts","Vocabulary"],
+    Italian:["Spelling","Grammar","Writing","Language Arts","Vocabulary"],
+    Korean:["Spelling","Grammar","Writing","Language Arts","Vocabulary"]
+  };
+  window.openLanguage=function(language){
+    document.querySelectorAll('main section').forEach(s=>s.hidden=true);
+    const section=document.getElementById('languages'); if(section) section.hidden=false;
+    const box=document.getElementById('languageCategories'); const cards=document.getElementById('languageCategoryCards');
+    document.getElementById('languageCategoryTitle').textContent=language+' — What do you want to learn?';
+    cards.innerHTML=languageCategories[language].map(c=>`<article class="subject"><h4>${c}</h4><button class="shop-button" onclick="openTopic('${language}','${c}')">Learn →</button></article>`).join('');
+    box.hidden=false; box.scrollIntoView({behavior:'smooth'});
+  };
+  window.openTopic=function(subject,topic){
+    const params=new URLSearchParams({subject,topic});
+    window.location.href='/questions?'+params.toString();
+  };
+  function planClass(plan){return {'Free':'plan-free','StudyVault Plus':'plan-plus','StudyVault Pro':'plan-pro','StudyVault Max':'plan-max'}[plan]||'plan-free'}
+  window.updateStudyVaultBackground=function(){
+    document.body.classList.remove('plan-free','plan-plus','plan-pro','plan-max');
+    document.body.classList.add(planClass(localStorage.getItem('studyVaultPlan')||'Free'));
+  };
+  updateStudyVaultBackground();
+  const init=localStorage.getItem('studyVaultExp'); if(init===null) localStorage.setItem('studyVaultExp','0');
+  if(localStorage.getItem('studyVaultStreak')===null) localStorage.setItem('studyVaultStreak','0');
+  if(localStorage.getItem('studyVaultEmbers')===null) localStorage.setItem('studyVaultEmbers','0');
+  if(localStorage.getItem('studyVault3xUntil')===null) localStorage.setItem('studyVault3xUntil','0');
+  window.getExp=()=>Number(localStorage.getItem('studyVaultExp')||0);
+  window.awardExp=function(base=10){
+    const active=Date.now()<Number(localStorage.getItem('studyVault3xUntil')||0);
+    let exp=getExp()+(active?base*3:base), gems=Number(localStorage.getItem('studyVaultGems')||0);
+    let converted=0; if(exp>=100){converted=Math.floor(exp/100); gems+=converted*10; exp%=100;}
+    localStorage.setItem('studyVaultExp',String(exp)); localStorage.setItem('studyVaultGems',String(gems));
+    if(typeof updateGemsUI==='function') updateGemsUI();
+    return {earned:active?base*3:base,converted};
+  };
+  window.buyExpBoost=function(){
+    const gems=Number(localStorage.getItem('studyVaultGems')||0);
+    if(gems<450) return false; localStorage.setItem('studyVaultGems',String(gems-450)); localStorage.setItem('studyVault3xUntil',String(Date.now()+15*60*1000)); if(typeof updateGemsUI==='function') updateGemsUI(); return true;
+  };
+  window.buyEmber=function(){
+    const gems=Number(localStorage.getItem('studyVaultGems')||0); if(gems<250) return false; localStorage.setItem('studyVaultGems',String(gems-250)); localStorage.setItem('studyVaultEmbers',String(Number(localStorage.getItem('studyVaultEmbers')||0)+1)); if(typeof updateGemsUI==='function') updateGemsUI(); return true;
+  };
+  window.updateStudyVaultBackground=window.updateStudyVaultBackground;
+})();
+</script>
 </body>
 </html>
