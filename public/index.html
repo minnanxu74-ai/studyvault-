@@ -521,7 +521,11 @@ detectStudyRegion();
 
 const curriculum = {
   math: {
-    K:["Counting, shapes & patterns","Numbers to 20, sorting, simple addition"],
+    K:[
+      ["Simple Addition", "Add numbers using pictures and arrows"],
+      ["Simple Subtraction", "Subtract numbers using pictures and arrows"]
+    ],  
+    
     1:["Addition, subtraction & place value","Numbers to 100, measurement, basic geometry"],
     2:["Multiplication & division","Place value, money, time, graphs, fractions"],
     3:["Fractions & multiplication","Area, perimeter, data, multi-step problems"],
@@ -577,7 +581,7 @@ const curriculum = {
     t.textContent="Social Studies";
     d.textContent="Explore Canada through communities, geography, civics, Indigenous perspectives and history.";
   }
-})();
+})();)
 
 function renderLevels(subject, targetId){
   const box=document.getElementById(targetId);
@@ -587,14 +591,43 @@ function renderLevels(subject, targetId){
       <span class="curriculum-tag">${grade==="K"?"Kindergarten":"Grade "+grade}</span>
       <strong>${data[0]}</strong>
       <small>${data[1]}</small>
-      <button onclick="openLevel('${subject}','${grade}')">Start level →</button>
+      <button onclick="openLevel('${subject}','${grade}',${i})">Start level →</button>
     </article>`).join("");
 }
-function openLevel(subject,grade){
-  if(typeof window.openStudyQuestions === "function"){
+  function openLevel(subject, grade, index) {
+
+  if (String(grade).toUpperCase() === "K") {
+
+    if (subject === "coding") {
+      window.location.href = "/kindergarten-coding-blocks-high-contrast-final.html";
+      return;
+    }
+
+    if (subject === "english") {
+      window.location.href = "/kindergarten-english-a-z-back-question-locked-final.html";
+      return;
+    }
+
+    if (subject === "math") {
+      
+     if (index === 0)
+      window.location.href = "/kindergarten-math-addition-arrow-final.html";
+      return;
+    }
+  
+     if (index === 1)
+      window.location.href = "/kindergarten-math-subtraction-arrow-final.html";
+      return;
+    }      
+  }  
+    if (typeof window.openStudyQuestions === "function") {
     window.openStudyQuestions(subject, grade);
   } else {
-    const params = new URLSearchParams({subject:String(subject), level:String(grade)});
+    const params = new URLSearchParams({
+      subject: String(subject),
+      level: String(grade)
+    });
+
     history.pushState({}, "", "/questions?" + params.toString());
   }
 }
