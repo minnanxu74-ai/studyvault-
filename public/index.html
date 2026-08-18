@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyVault — Master Math, English & Coding</title>
+<style>
+:root{
+  --ink:#182230; --muted:#667085; --bg:#f6f8fc; --card:#fff; --line:#e7ebf2;
+  --purple:#6d5dfc; --blue:#2f80ed; --green:#20b486; --orange:#ff9f43;
+  --shadow:0 18px 45px rgba(35,45,75,.09);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+button{font:inherit;cursor:pointer;border:0}
+a{text-decoration:none;color:inherit}
+.app{display:flex;min-height:100vh}
+.sidebar{width:250px;background:#fff;border-right:1px solid var(--line);padding:24px 18px;position:fixed;inset:0 auto 0 0;z-index:5}
+.logo{font-size:24px;font-weight:900;letter-spacing:-1px;padding:8px 12px 25px}
+.logo span{color:var(--purple)}
+.nav{display:grid;gap:8px}
+.nav button{background:transparent;color:#667085;text-align:left;padding:13px 14px;border-radius:12px;font-weight:700}
+.nav button:hover,.nav button.active{background:#f0eeff;color:var(--purple)}
+.side-note{position:absolute;bottom:25px;left:18px;right:18px;padding:16px;border-radius:18px;background:#f6f7ff;font-size:13px;color:var(--muted)}
+.main{margin-left:250px;width:calc(100% - 250px);padding:30px 40px 60px;max-width:1500px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:28px}
+.welcome h1{font-size:30px;margin:0 0 5px;letter-spacing:-1px}
+.welcome p{margin:0;color:var(--muted)}
+.profile{display:flex;align-items:center;gap:12px;background:#fff;padding:8px 12px;border-radius:14px;border:1px solid var(--line)}
+.avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#eeeaff;font-weight:900;color:var(--purple)}
+.hero{background:linear-gradient(135deg,#6558f5,#8d7cff);color:#fff;border-radius:28px;padding:34px;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;box-shadow:var(--shadow);overflow:hidden;position:relative}
+.hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:-80px;top:-120px;background:rgba(255,255,255,.10)}
+.hero h2{font-size:38px;line-height:1.05;margin:0 0 14px;letter-spacing:-1.5px}
+.hero p{font-size:16px;line-height:1.6;opacity:.9;max-width:600px}
+.primary{background:#fff;color:var(--purple);padding:13px 19px;border-radius:12px;font-weight:800;margin-top:10px}
+.hero-art{display:grid;place-items:center;position:relative;z-index:1}
+.orbit{width:245px;height:245px;border-radius:50%;border:1px dashed rgba(255,255,255,.45);display:grid;place-items:center}
+.orbit-center{width:112px;height:112px;border-radius:28px;background:#fff;color:var(--purple);display:grid;place-items:center;font-size:42px;font-weight:900;box-shadow:0 15px 35px rgba(0,0,0,.12)}
+.float{position:absolute;background:#fff;color:var(--ink);padding:11px 14px;border-radius:14px;font-weight:800;box-shadow:0 10px 25px rgba(0,0,0,.12)}
+.f1{top:20px;left:35px}.f2{right:0;top:70px}.f3{bottom:30px;left:5px}
+.section-head{display:flex;align-items:end;justify-content:space-between;margin:35px 0 15px}
+.section-head h3{font-size:21px;margin:0}.section-head span{font-size:13px;color:var(--muted)}
+.subjects{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.subject{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 8px 25px rgba(35,45,75,.04);transition:.2s}
+.subject:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.subject-icon{width:55px;height:55px;border-radius:16px;display:grid;place-items:center;font-size:28px;margin-bottom:17px}
+.math .subject-icon{background:#fff0e4}.english .subject-icon{background:#eaf3ff}.coding .subject-icon{background:#e8fbf4}
+.subject h4{font-size:19px;margin:0 0 6px}.subject p{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 16px}
+.progress{height:8px;background:#edf0f5;border-radius:20px;overflow:hidden}.progress i{display:block;height:100%;border-radius:20px}.math .progress i{background:var(--orange);width:K–12}.english .progress i{background:var(--blue);width:K–12}.coding .progress i{background:var(--green);width:K–12}
+.meta{display:flex;justify-content:space-between;margin-top:10px;font-size:12px;color:var(--muted);font-weight:700}
+.dashboard{display:grid;grid-template-columns:1.4fr .8fr;gap:18px;margin-top:18px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px}
+.lesson{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}.lesson:last-child{border-bottom:0}
+.lesson-num{width:38px;height:38px;border-radius:12px;background:#f0eeff;color:var(--purple);display:grid;place-items:center;font-weight:900}
+.lesson strong{font-size:14px}.lesson small{display:block;color:var(--muted);margin-top:3px}
+.lesson button{margin-left:auto;background:#f5f6fa;padding:9px 13px;border-radius:10px;font-weight:800;font-size:12px}.lesson button:hover{background:#eceaff;color:var(--purple)}
+.stats{display:grid;gap:13px}.stat{padding:17px;border-radius:16px;background:#f8f9fc}.stat b{font-size:25px}.stat span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.quiz{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px}
+.quiz h3{margin-top:0}.choice{width:100%;text-align:left;padding:13px 15px;background:#f7f8fb;border:1px solid transparent;border-radius:12px;margin:7px 0}.choice:hover{border-color:#cfc9ff;background:#f5f3ff}.choice.correct{background:#eafaf4;border-color:#9fe0c7}.choice.wrong{background:#fff0f0;border-color:#ffc2c2}
+#result{font-weight:800;margin-top:12px;min-height:22px}
+footer{text-align:center;color:#98a2b3;font-size:12px;margin-top:35px}
+
+.levels{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.level-card{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fafbfe;transition:.2s}
+.level-card:hover{transform:translateY(-2px);border-color:#d4cffd;background:#f7f5ff}
+.level-card strong{display:block;font-size:16px;margin-bottom:5px}
+.level-card small{display:block;color:var(--muted);line-height:1.45;min-height:38px}
+.level-card button{margin-top:12px;background:#f0eeff;color:var(--purple);padding:9px 12px;border-radius:10px;font-weight:800;font-size:12px}
+.level-card button:hover{background:var(--purple);color:white}
+.curriculum-tag{display:inline-block;margin-bottom:8px;padding:4px 8px;border-radius:999px;background:#eef1f7;color:#667085;font-size:10px;font-weight:800}
+@media(max-width:1100px){.levels{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.levels{grid-template-columns:repeat(2,1fr)}}
+
+
+.signin-mini{background:#6d5dfc;color:#fff;padding:9px 13px;border-radius:10px;font-weight:800;font-size:12px}
+.signin-mini:hover{background:#5548dc}
+.auth-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.48);display:grid;place-items:center;z-index:50;padding:20px}
+.auth-card{width:min(430px,100%);background:#fff;border-radius:24px;padding:30px;box-shadow:0 25px 70px rgba(0,0,0,.2);position:relative}
+.auth-card h2{margin:0 0 7px;font-size:28px;letter-spacing:-.7px}
+.auth-card p{color:#667085;font-size:14px;line-height:1.5;margin:0 0 20px}
+.auth-close{position:absolute;right:18px;top:16px;background:#f2f4f7;border-radius:50%;width:34px;height:34px;font-size:20px}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;background:#f5f6fa;border-radius:12px;padding:4px;margin-bottom:18px}
+.auth-tabs button{padding:10px;border-radius:9px;background:transparent;color:#667085;font-weight:800}
+.auth-tabs button.active{background:#fff;color:#6d5dfc;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.auth-field{margin-bottom:13px}.auth-field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px}
+.auth-field input{width:100%;padding:12px 13px;border:1px solid #dfe3ea;border-radius:11px;font:inherit;outline:none}
+.auth-field input:focus{border-color:#6d5dfc;box-shadow:0 0 0 3px #eeeaff}
+.auth-submit{width:100%;padding:13px;border-radius:11px;background:#6d5dfc;color:#fff;font-weight:900;margin-top:4px}
+.auth-note{text-align:center;font-size:11px!important;margin-top:14px!important;color:#98a2b3!important}
+.auth-error{color:#d92d20;font-size:12px;font-weight:700;min-height:18px;margin:6px 0}
+
+
+.energy-badge{display:flex;align-items:center;gap:3px;background:#fff7df;color:#9a6700;border:1px solid #f5df9d;padding:8px 10px;border-radius:10px;font-size:12px;font-weight:800;white-space:nowrap}
+.energy-badge span{font-size:15px}
+.energy-empty{background:#fff0f0;color:#d92d20;border-color:#ffc8c8}
+.energy-warning{background:#fff7df;color:#9a6700;border-color:#f5df9d}
+.energy-message{font-size:12px;font-weight:800;margin-top:10px;color:#667085}
+.quiz-locked{opacity:.65;pointer-events:none}
+
+
+.gems-badge{background:#eef8ff;color:#1677b8;border:1px solid #cceaff}
+.gems-badge span{font-size:15px}
+.energy-shop{margin:18px 0;padding:18px;border-radius:16px;background:#f7f5ff;border:1px solid #ddd8ff}
+.energy-shop h3{margin:0 0 6px}.energy-shop p{margin:0 0 12px;color:#667085;font-size:13px}
+.shop-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.shop-button{background:#6d5dfc;color:#fff;padding:11px 15px;border-radius:11px;font-weight:900}
+.shop-button:disabled{background:#c8c4dd;cursor:not-allowed}
+.gem-message{font-size:12px;font-weight:800;margin-top:9px;min-height:18px;color:#667085}
+.lesson-complete{background:#eafaf4!important;border-color:#b9ead6!important;color:#13795b!important}
+
+
+
+.login-actions{display:flex;align-items:center;gap:7px}
+
+
+.domain-plan{margin-top:14px;padding:13px;border-radius:14px;background:#f7f5ff;border:1px solid #ddd8ff;font-size:12px;color:#5b4de0}
+
+
+.guest-login-button{width:100%;margin-top:9px;padding:12px;border-radius:11px;background:#f3f4f7;color:#344054;font-weight:800;border:1px solid #e2e5eb}
+.guest-login-button:hover{background:#e9ebf0}
+
+.domain-button{background:#182230;color:#fff;padding:9px 12px;border-radius:10px;font-weight:800;font-size:12px}
+.domain-button:hover{background:#303b4b}
+.admin-badge{background:#eeeaff;color:#5b4de0;border:1px solid #d9d4ff;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:900;margin-left:5px}
+
+
+.subscription-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:18px}
+.plan-card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:18px;box-shadow:0 5px 18px rgba(16,24,40,.05)}
+.plan-card h3{margin:0 0 6px;font-size:18px}.plan-card p{margin:0 0 12px;color:#667085;font-size:12px;line-height:1.5}
+.plan-card ul{margin:0;padding-left:18px;color:#475467;font-size:12px;line-height:1.8}
+.plan-card .plan-name{font-weight:900}.plan-card .plan-price{font-size:12px;color:#6d5dfc;font-weight:900;margin-bottom:8px}
+.question-counter{display:inline-flex;gap:5px;align-items:center;background:#f4f3ff;color:#5b4de0;border-radius:10px;padding:7px 10px;font-size:12px;font-weight:900}
+
+@media(max-width:900px){.sidebar{width:76px;padding:18px 10px}.logo{font-size:20px;text-align:center;padding:8px 0 25px}.logo span{display:none}.nav button{font-size:0;text-align:center}.nav button:first-letter{font-size:20px}.side-note{display:none}.main{margin-left:76px;width:calc(100% - 76px);padding:24px}.hero{grid-template-columns:1fr}.hero-art{display:none}.subjects{grid-template-columns:1fr}.dashboard{grid-template-columns:1fr}}
+@media(max-width:600px){.main{padding:18px}.topbar{align-items:flex-start}.profile span{display:none}.welcome h1{font-size:24px}.hero{padding:25px}.hero h2{font-size:31px}}
+[hidden]{display:none!important}
+
+#topSignInButton{margin-left:auto;margin-right:8px}
+@media(max-width:900px){#topSignInButton{margin-left:0}}
+
+</style>
+</head>
+<body>
+
+<script>
+(function(){
+  function modal(id, show){
+    var el=document.getElementById(id);
+    if(!el) return;
+    if(show){
+      el.hidden=false;
+      el.style.display="grid";
+      el.setAttribute("aria-hidden","false");
+    }else{
+      el.hidden=true;
+      el.style.display="none";
+      el.setAttribute("aria-hidden","true");
+    }
+  }
+
+  window.SV = window.SV || {};
+  SV.showModal=function(id){ modal(id,true); };
+  SV.hideModal=function(id){ modal(id,false); };
+  SV.closeAll=function(){
+    ["authModal","domainModal","domainSetupModal","loginChoiceModal"].forEach(function(id){ modal(id,false); });
+  };
+
+  // Capture clicks on popup controls so later script errors cannot make them inert.
+  document.addEventListener("click", function(e){
+    var t=e.target.closest ? e.target.closest("[data-sv-action]") : null;
+    if(!t) return;
+    var action=t.getAttribute("data-sv-action");
+    if(action==="close-auth") SV.hideModal("authModal");
+    if(action==="close-domain") SV.hideModal("domainModal");
+    if(action==="close-domain-setup") SV.hideModal("domainSetupModal");
+    if(action==="close-choice") SV.hideModal("loginChoiceModal");
+    if(action==="regular-login"){
+      SV.hideModal("loginChoiceModal");
+      setTimeout(function(){ SV.showModal("authModal"); if(typeof setAuthMode==="function") setAuthMode("signin"); },0);
+    }
+    if(action==="domain-login"){
+      SV.hideModal("loginChoiceModal");
+      setTimeout(function(){ SV.showModal("domainModal"); },0);
+    }
+  }, true);
+
+  document.addEventListener("keydown",function(e){
+    if(e.key==="Escape") SV.closeAll();
+  });
+})();
+</script>
+
+
+<div class="auth-backdrop" id="authModal" hidden>
+  <div class="auth-card">
+    <button type="button" class="auth-close" type="button" data-sv-action="close-auth" onclick="closeAuth(event)">×</button>
+    <h2 id="authTitle">Welcome to StudyVault</h2>
+    <p id="authSubtitle">Sign in to save your K–12 learning progress and continue where you left off.</p>
+    <div class="auth-tabs">
+      <button type="button" id="signinTab" class="active" onclick="setAuthMode('signin')">Sign in</button>
+      <button type="button" id="signupTab" onclick="setAuthMode('signup')">Create account</button>
+    </div>
+    <form id="authForm" onsubmit="handleAuth(event); return false;">
+      <div class="auth-field" id="nameField" hidden><label>NAME</label><input id="nameInput" type="text" placeholder="Your name"></div>
+      <div class="auth-field"><label>EMAIL</label><input id="emailInput" type="email" placeholder="you@example.com" required></div>
+      <div class="auth-field"><label>PASSWORD</label><input id="passwordInput" type="password" placeholder="At least 6 characters" minlength="6" required></div>
+      <div class="auth-error" id="authError"></div>
+      <button class="auth-submit" id="authSubmit" type="submit">Sign in</button>
+      <button type="button" class="guest-login-button" onclick="loginWithoutAccount()">Log in without account</button>
+    </form>
+    
+<div style="text-align:center;margin-top:10px">
+  <button type="button" id="forgotPasswordBtn" style="background:none;color:#6d5dfc;font-size:12px;font-weight:800" onclick="resetLocalPassword()">Forgot password?</button>
+</div>
+<p class="auth-note">Demo sign-in: this prototype stores the account locally in your browser. A real production site would connect this form to a secure authentication service.</p>
+  </div>
+</div>
+
+<div class="auth-backdrop" id="domainModal" hidden>
+  <div class="auth-card">
+    <button type="button" class="auth-close" type="button" data-sv-action="close-domain" onclick="closeDomainLogin(event)">×</button>
+    <h2>Log in Domain</h2>
+    <p>Creator / administrator access requires an active <b>StudyVault Domain</b> subscription and a special Domain Key.</p>
+    <form onsubmit="handleDomainLogin(event); return false;">
+      <div class="auth-field">
+        <label>USERNAME</label>
+        <input id="domainUsername" type="text" placeholder="Administrator" autocomplete="username" required>
+      </div>
+      <div class="auth-field">
+        <label>STUDYVAULT DOMAIN KEY</label>
+        <input id="domainKey" type="password" placeholder="Enter your special key" autocomplete="off" required>
+      </div>
+      <div class="auth-error" id="domainError"></div>
+      <button class="auth-submit" type="submit">Verify Domain Access</button>
+    </form>
+    <div class="domain-plan"><b>🔐 StudyVault Domain</b><br>Protected administrator access with a private Domain Key.</div>
+    <p class="auth-note">StudyVault Domain is the protected subscription for domain owners and administrators.</p><div style="text-align:center;margin-top:10px"><button type="button" style="background:none;color:#6d5dfc;font-size:12px;font-weight:800" onclick="openDomainSetup()">Set up StudyVault Domain</button></div>
+  </div>
+</div>
+
+<div class="auth-backdrop" id="loginChoiceModal" hidden>
+  <div class="auth-card">
+    <button type="button" class="auth-close" type="button" data-sv-action="close-choice" onclick="closeLoginChoice(event)">×</button>
+    <h2>Choose how to sign in</h2>
+    <p>Select the account type you want to use.</p>
+    <div style="display:grid;gap:10px">
+      <button class="auth-submit" type="button" onclick="document.getElementById('loginChoiceModal').hidden=true; document.getElementById('authModal').hidden=false; setAuthMode('signin');">👤 Sign In</button>
+      <button class="auth-submit" type="button" style="background:#182230" onclick="closeLoginChoice(event); openDomainLogin();">👑 Log In as Domain Owner</button>
+    </div>
+  </div>
+</div>
+<div class="auth-backdrop" id="domainSetupModal" hidden><div class="auth-card"><button type="button" class="auth-close" type="button" data-sv-action="close-domain-setup" onclick="closeDomainSetup(event)">×</button><h2>StudyVault Domain</h2><p>Create the private Domain Key for this prototype.</p><form onsubmit="saveDomainKey(event); return false;"><div class="auth-field"><label>CREATE DOMAIN KEY</label><input id="newDomainKey" type="password" minlength="8" required></div><div class="auth-field"><label>CONFIRM DOMAIN KEY</label><input id="confirmDomainKey" type="password" minlength="8" required></div><div class="auth-error" id="domainSetupError"></div><button class="auth-submit" type="submit">Activate Domain</button></form></div></div><div class="app">
+  <aside class="sidebar">
+    <div class="logo">Study<span>Vault</span></div>
+    <nav class="nav">
+      <button class="active" onclick="showSection('home',this)">🏠 Home</button>
+      <button onclick="showSection('math',this)">➗ Math</button>
+      <button onclick="showSection('english',this)">📚 English</button>
+      <button onclick="showSection('coding',this)">💻 Coding</button>
+      <button id="historyNav" onclick="showSection('history',this)">🌎 History</button><button onclick="showSection('subscriptions',this)">💳 Plans</button>
+      <button onclick="showSection('progress',this)">📈 Progress</button>
+    </nav>
+    <div class="side-note">🌱 Start small. Practice every day. Build real skills.</div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="welcome"><h1>Welcome back 👋</h1><p>Learn from the beginning, one step at a time.</p></div>
+      <button class="signin-mini" id="topSignInButton" type="button" onclick="openLoginChoice()">Sign in</button><div class="profile"><div class="avatar" id="avatar">?</div><span><b id="profileName">Guest</b><br><small id="profileLevel">Free learner</small></span><div class="currency-badge gems-badge" title="Gems"><span>💎</span><b id="gemCount">0</b></div><div class="energy-badge" title="Energy"><span>⚡</span><b id="energyCount">10</b>/10</div><div class="login-actions"><button class="signin-mini" onclick="openLoginChoice()">Log in</button><button class="domain-button" onclick="openDomainLogin()">Log in Domain</button></div></div>
+    </div>
+
+    <section id="home">
+      <div class="hero">
+        <div>
+          <h2>Master the basics.<br>Build your future.</h2>
+          <p>Learn Math, English, and Coding through short lessons, practice questions, and hands-on challenges. No experience required.</p>
+          <button class="primary" onclick="document.getElementById('subjects').scrollIntoView({behavior:'smooth'})">Start learning →</button>
+        </div>
+        <div class="hero-art">
+          <div class="orbit">
+            <div class="orbit-center">✦</div>
+            <div class="float f1">➗ Math</div><div class="float f2">Aa English</div><div class="float f3">&lt;/&gt; Code</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-head" id="subjects"><h3>Choose your learning path</h3><span>Start at Level 1</span></div>
+      <div class="subjects">
+        <article class="subject math"><div class="subject-icon">➗</div><h4>Math Foundations</h4><p>A complete K–12 pathway from counting and basic operations to algebra, geometry, trigonometry, and calculus.</p><div class="progress"><i></i></div><div class="meta"><span>K–12 Pathway</span><span>K–12</span></div></article>
+        <article class="subject english"><div class="subject-icon">Aa</div><h4>English Foundations</h4><p>A complete K–12 pathway from phonics and basic vocabulary to reading, writing, grammar, literature, and advanced communication.</p><div class="progress"><i></i></div><div class="meta"><span>K–12 Pathway</span><span>K–12</span></div></article>
+        <article class="subject coding"><div class="subject-icon">&lt;/&gt;</div><h4>Coding Foundations</h4><p>A complete K–12 pathway from digital literacy and logic to programming, web development, data, algorithms, and computer science.</p><div class="progress"><i></i></div><div class="meta"><span>K–12 Pathway</span><span>K–12</span></div></article>
+      
+<article class="subject history"><div class="subject-icon">🌎</div><h4 id="homeHistoryTitle">History</h4><p id="homeHistoryDescription">Explore the past from early civilizations to the modern world.</p><div class="progress"><i></i></div><div class="meta"><span>K–12 Pathway</span><span>K–12</span></div></article>
+</div>
+
+      <div class="dashboard">
+        <div class="panel"><div class="section-head" style="margin:0 0 8px"><h3>Today's learning</h3><span>20–30 min</span></div>
+          <div class="lesson"><div class="lesson-num">01</div><div><strong>Math: Understanding numbers</strong><small>10 min · Beginner</small></div><button onclick="completeLesson('Math lesson')">Start</button></div>
+          <div class="lesson"><div class="lesson-num">02</div><div><strong>English: 10 useful words</strong><small>8 min · Beginner</small></div><button onclick="completeLesson('English lesson')">Start</button></div>
+          <div class="lesson"><div class="lesson-num">03</div><div><strong>Coding: Your first Python program</strong><small>12 min · Beginner</small></div><button onclick="completeLesson('Coding lesson')">Start</button></div>
+          <div id="lessonMsg" style="color:var(--purple);font-weight:800;margin-top:12px"></div>
+        </div>
+        <div class="panel"><div class="section-head" style="margin:0 0 8px"><h3>Your progress</h3></div>
+          <div class="stats"><div class="stat"><b>7 🔥</b><span>Day learning streak</span></div><div class="stat"><b>18</b><span>Lessons completed</span></div><div class="stat"><b>82%</b><span>Practice accuracy</span></div></div>
+        </div>
+      </div>
+
+      <div class="quiz">
+        <h3>Quick practice · Math</h3>
+        <p>What is <b>8 + 7</b>?</p>
+        <button class="choice" onclick="answer(this,false)">13</button>
+        <button class="choice" onclick="answer(this,true)">15</button>
+        <button class="choice" onclick="answer(this,false)">16</button>
+        <button class="choice" onclick="answer(this,false)">17</button>
+        <div id="result"></div>
+      </div>
+    </section>
+
+    <section id="math" hidden><div class="panel"><h2>➗ Math · Kindergarten → Grade 12</h2><p>Choose a grade and learn step-by-step. Each level builds on the skills from the previous one.</p><div class="levels" id="mathLevels"></div></div></section>
+
+    <section id="english" hidden><div class="panel"><h2>📚 English · Kindergarten → Grade 12</h2><p>Choose a grade and progress from phonics and early reading to advanced writing, literature, and communication.</p><div class="levels" id="englishLevels"></div></div></section>
+
+    <section id="coding" hidden><div class="panel"><h2>💻 Coding · Kindergarten → Grade 12</h2><p>Build computer-science skills progressively, from digital thinking and block coding to Python, web development, algorithms, and projects.</p><div class="levels" id="codingLevels"></div></div></section>
+
+    
+<section id="history" hidden>
+  <div class="panel">
+    <h2 id="historyTitle">🌎 History · Kindergarten → Grade 12</h2>
+    <p id="historyDescription">Explore history from the earliest civilizations through the modern world, with age-appropriate lessons for every grade.</p>
+    <div class="levels" id="historyLevels"></div>
+  </div>
+</section>
+
+
+
+<section id="questionsPage" hidden>
+  <div class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>
+        <h2 id="questionsTitle">Questions</h2>
+        <p id="questionsSubtitle">Let's start learning.</p>
+      </div>
+      <span class="question-counter" id="questionCounter">📝 10/10 questions today</span>
+    </div>
+    <div id="questionCard" class="plan-card" style="margin-top:18px">
+      <h3 id="questionNumber">Question 1</h3>
+      <p id="questionText">Loading question…</p>
+      <div id="answerChoices" style="display:grid;gap:10px"></div>
+      <div id="result" style="margin-top:14px;font-weight:800"></div>
+      <button type="button" id="nextQuestionBtn" class="auth-submit" style="margin-top:14px" onclick="nextStudyQuestion()">Next Question</button>
+    </div>
+  </div>
+</section>
+<section id="subscriptions" hidden>
+  <div class="panel">
+    <h2>💳 StudyVault Subscriptions</h2>
+    <p>Choose the plan that fits your learning journey.</p>
+    <div class="subscription-grid">
+      <article class="plan-card"><h3>🆓 <span class="plan-name">Free</span></h3><p class="plan-price">10 questions per day</p><ul><li>Math, English & Coding</li><li>Regular energy system</li><li>10 💎 gems per completed lesson</li><li>Daily question limit resets each day</li></ul></article>
+      <article class="plan-card"><h3>⭐ <span class="plan-name">StudyVault Plus</span></h3><p class="plan-price">Unlimited Learning</p><ul><li>Unlimited Learning</li><li>All 3 subjects unlocked</li><li>Regular energy system</li></ul></article>
+      <article class="plan-card"><h3>🚀 <span class="plan-name">StudyVault Pro</span></h3><p class="plan-price">Advanced learning</p><ul><li>Unlimited Energy</li><li>Unlimited Learning</li><li>Free Legendary Levels (normally 500 💎)</li><li>All 3 subjects unlocked</li><li>Explain This Question — Powered by ChatGPT</li></ul></article>
+      <article class="plan-card"><h3>👑 <span class="plan-name">StudyVault Max</span></h3><p class="plan-price">Ultimate learner plan</p><ul><li>Unlimited Energy</li><li>Unlimited Learning</li><li>Personalized Learning</li><li>Free Legendary Levels</li><li>Roleplay</li><li>Free Exercises (normally 1,000 💎)</li><li>100 💎 every 7 days</li><li>Explain This Question Plus — Powered by ChatGPT</li></ul></article>
+      <article class="plan-card"><h3>🏢 <span class="plan-name">StudyVault Domain</span></h3><p class="plan-price">Domain Owner</p><ul><li>Protected Administrator access</li><li>Requires Domain Key</li><li>Username: Administrator</li></ul></article>
+      <article class="plan-card"><h3>🏢👑 <span class="plan-name">StudyVault Domain +</span></h3><p class="plan-price">Premium Domain Owner</p><ul><li>Everything in Domain</li><li>Advanced creator features</li><li>Administrator tools</li></ul></article>
+    </div>
+  </div>
+</section>
+
+<section id="progress" hidden><div class="panel"><h2>📈 Your Progress</h2><p>Keep your momentum going. Consistency beats cramming.</p><div class="energy-panel" style="margin:18px 0;padding:18px;border-radius:16px;background:#fffaf0;border:1px solid #f3dfaa"><h3 style="margin:0 0 6px">⚡ Learning Energy</h3><p style="margin:0;color:#667085;font-size:13px">You start each learning session with 10 energy. A wrong answer costs 1 energy.</p><strong id="progressEnergy">10 / 10 energy</strong> <span class="question-counter" id="questionCounter">📝 10/10 questions today</span></div>
+<div class="energy-shop">
+  <h3>💎 Energy Shop</h3>
+  <p>Earn <b>10 gems</b> every time you complete a lesson. Spend <b>450 gems</b> to refill your energy to 10.</p>
+  <div class="shop-row"><strong>⚡ Refill to 10 Energy</strong><button class="shop-button" id="buyEnergyButton" onclick="buyEnergy()">💎 450</button></div>
+  <div class="gem-message" id="gemMessage"></div>
+</div><div class="subjects"><article class="subject math"><div class="subject-icon">➗</div><h4>Math</h4><div class="progress"><i></i></div><div class="meta"><span>K–12</span><span>4/12</span></div></article><article class="subject english"><div class="subject-icon">Aa</div><h4>English</h4><div class="progress"><i></i></div><div class="meta"><span>K–12</span><span>2/11</span></div></article><article class="subject coding"><div class="subject-icon">&lt;/&gt;</div><h4>Coding</h4><div class="progress"><i></i></div><div class="meta"><span>K–12</span><span>1/12</span></div></article></div></div></section>
+
+    <footer>StudyVault · A beginner-first learning dashboard</footer>
+  </main>
+</div>
+<script>
+
+
+const historyCurriculum = {
+  history: {
+    K:["Families, communities & the past","Learn about time, traditions, communities and important people."],
+    1:["People & places","Explore families, communities, maps and how life changes over time."],
+    2:["Communities & cultures","Study local communities, traditions, landmarks and historical stories."],
+    3:["Ancient civilizations","Discover early civilizations, inventions, government and daily life."],
+    4:["World civilizations","Explore major civilizations, trade, migration and cultural development."],
+    5:["Medieval & early modern world","Study kingdoms, exploration, global connections and major changes."],
+    6:["World history foundations","Ancient to early modern history, geography and historical evidence."],
+    7:["Modern world history","Revolutions, industrialization, imperialism and global change."],
+    8:["20th-century history","World wars, social change, technology and international relations."],
+    9:["World history","Analyze major events, movements, leaders and historical perspectives."],
+    10:["Modern world studies","Political, economic and social forces shaping the modern world."],
+    11:["Historical analysis","Primary sources, historiography, research and competing interpretations."],
+    12:["Advanced history & research","Independent historical research, argument, evidence and global perspectives."]
+  },
+  canada: {
+    K:["My community & Canada","Families, communities, symbols, traditions and the land around us."],
+    1:["Canada & my community","Learn about Canadian communities, maps, traditions and citizenship."],
+    2:["People and places in Canada","Explore regions, Indigenous peoples, communities and Canadian identity."],
+    3:["Early Canada","Learn about First Nations, Inuit and Métis peoples, early contact and communities."],
+    4:["Canada’s past","Explore Confederation, provinces, immigration, treaties and important events."],
+    5:["Canada 1800s–1900s","Study Confederation, expansion, residential schools, immigration and change."],
+    6:["Canadian history & identity","Indigenous histories, Confederation, government, rights and diverse perspectives."],
+    7:["Canada in the modern world","Industrialization, immigration, World Wars, social movements and change."],
+    8:["Canada & global events","Canada’s role in World Wars, the economy, culture and international affairs."],
+    9:["Canadian studies","Government, citizenship, historical evidence, Indigenous-settler relations and identity."],
+    10:["Canadian history","Major events, policies, movements, regional perspectives and historical debate."],
+    11:["Canadian history & society","Historical research, primary sources, Indigenous perspectives and social change."],
+    12:["Advanced Canadian studies","Independent research, historiography, government, identity and contemporary issues."]
+  }
+};
+
+function renderHistoryLevels(type){
+  const box=document.getElementById("historyLevels");
+  const data=type==="canada"?historyCurriculum.canada:historyCurriculum.history;
+  box.innerHTML=Object.entries(data).map(([grade,item])=>`
+    <article class="level-card">
+      <span class="curriculum-tag">${grade==="K"?"Kindergarten":"Grade "+grade}</span>
+      <strong>${item[0]}</strong>
+      <small>${item[1]}</small>
+      <button onclick="openLevel('history','${grade}')">Start level →</button>
+    </article>`).join("");
+}
+
+function detectStudyRegion(){
+  // Browser locale is used only to select the curriculum; no location is stored.
+  const locale=(navigator.language||"").toLowerCase();
+  const canada = locale==="en-ca" || locale.endsWith("-ca") || locale.includes("ca");
+  const title=document.getElementById("historyTitle");
+  const desc=document.getElementById("historyDescription");
+  const nav=document.getElementById("historyNav");
+  if(canada){
+    nav.textContent="🍁 Social Studies";
+    title.textContent="🍁 Social Studies · Kindergarten → Grade 12";
+    desc.textContent="Canadian Social Studies from K–12, including Canadian history, geography, civics, Indigenous perspectives, citizenship and communities.";
+    renderHistoryLevels("canada");
+  }else{
+    nav.textContent="🌎 History";
+    title.textContent="🌎 History · Kindergarten → Grade 12";
+    desc.textContent="Explore history from the earliest civilizations through the modern world, with age-appropriate lessons for every grade.";
+    renderHistoryLevels("history");
+  }
+}
+detectStudyRegion();
+
+const curriculum = {
+  math: {
+    K:["Counting, shapes & patterns","Numbers to 20, sorting, simple addition"],
+    1:["Addition, subtraction & place value","Numbers to 100, measurement, basic geometry"],
+    2:["Multiplication & division","Place value, money, time, graphs, fractions"],
+    3:["Fractions & multiplication","Area, perimeter, data, multi-step problems"],
+    4:["Decimals, fractions & geometry","Equivalent fractions, angles, factors"],
+    5:["Ratios, decimals & volume","Fractions, coordinate plane, expressions"],
+    6:["Pre-algebra foundations","Integers, ratios, equations, statistics"],
+    7:["Expressions & equations","Proportions, probability, geometry"],
+    8:["Algebra & functions","Linear equations, systems, transformations"],
+    9:["Algebra I","Functions, quadratics, inequalities, modeling"],
+    10:["Geometry & proofs","Congruence, similarity, circles, trigonometry"],
+    11:["Algebra II / Precalculus","Polynomials, exponentials, logarithms, sequences"],
+    12:["Calculus & advanced math","Limits, derivatives, integrals, statistics"]
+  },
+  english: {
+    K:["Phonics, letters & speaking","Letter sounds, sight words, listening and simple sentences"],
+    1:["Early reading & writing","Phonics, decoding, vocabulary, sentence writing"],
+    2:["Reading fluency & grammar","Comprehension, paragraphs, parts of speech"],
+    3:["Reading comprehension & composition","Main idea, evidence, narratives, informative writing"],
+    4:["Research & structured writing","Grammar, vocabulary, essays, text evidence"],
+    5:["Literature & persuasive writing","Theme, summaries, argument and research"],
+    6:["Middle-school reading & writing","Analysis, vocabulary, grammar, multi-paragraph essays"],
+    7:["Literary analysis & argument","Evidence, rhetoric, research and revision"],
+    8:["Advanced composition","Complex texts, argument, synthesis and style"],
+    9:["English I","Literature, analytical writing, grammar and research"],
+    10:["English II","World literature, rhetoric, analysis and evidence"],
+    11:["English III","American literature, research and advanced composition"],
+    12:["English IV / College readiness","Literary criticism, research papers, rhetoric and presentation"]
+  },
+  coding: {
+    K:["Digital literacy & logic","Devices, patterns, sequencing and safe technology habits"],
+    1:["Algorithms & block coding","Instructions, loops, events and simple animations"],
+    2:["Patterns, games & computational thinking","Debugging, sequences, conditions and projects"],
+    3:["Scratch-style programming","Variables, loops, events and interactive stories"],
+    4:["Problem solving & data","Functions, logic, simple data and game projects"],
+    5:["Intro to text coding","Python basics, variables, conditions and loops"],
+    6:["Python foundations","Functions, lists, strings, debugging and small projects"],
+    7:["Programming & web basics","Python projects, HTML, CSS and JavaScript concepts"],
+    8:["Data & algorithms","Searching, sorting, complexity and web projects"],
+    9:["Computer Science I","Python, data structures, algorithms and software design"],
+    10:["Computer Science II","Object-oriented programming, databases and APIs"],
+    11:["Advanced programming","Algorithms, data structures, testing and larger applications"],
+    12:["Computer Science capstone","Full-stack projects, data, AI concepts and portfolio work"]
+  }
+};
+
+
+(function(){
+  const locale=(navigator.language||"").toLowerCase();
+  const canada=locale==="en-ca" || locale.endsWith("-ca") || locale.includes("ca");
+  const t=document.getElementById("homeHistoryTitle");
+  const d=document.getElementById("homeHistoryDescription");
+  if(t && d && canada){
+    t.textContent="Social Studies";
+    d.textContent="Explore Canada through communities, geography, civics, Indigenous perspectives and history.";
+  }
+})();
+
+function renderLevels(subject, targetId){
+  const box=document.getElementById(targetId);
+  const entries=Object.entries(curriculum[subject]);
+  box.innerHTML=entries.map(([grade,data],i)=>`
+    <article class="level-card">
+      <span class="curriculum-tag">${grade==="K"?"Kindergarten":"Grade "+grade}</span>
+      <strong>${data[0]}</strong>
+      <small>${data[1]}</small>
+      <button onclick="openLevel('${subject}','${grade}')">Start level →</button>
+    </article>`).join("");
+}
+function openLevel(subject,grade){
+  const data=curriculum[subject][grade];
+  alert(`${subject[0].toUpperCase()+subject.slice(1)} — ${grade==="K"?"Kindergarten":"Grade "+grade}\\n\\n${data[0]}\\n${data[1]}\\n\\nNext: lessons, practice questions, quizzes and projects.`);
+}
+renderLevels("math","mathLevels");
+renderLevels("english","englishLevels");
+renderLevels("coding","codingLevels");
+
+
+let authMode = "signin";
+
+
+function loginWithoutAccount(){
+  localStorage.setItem("studyVaultGuest","1");
+  localStorage.setItem("studyVaultSignedIn","1");
+  if(localStorage.getItem("studyVaultEnergy")===null) localStorage.setItem("studyVaultEnergy","10");
+  if(localStorage.getItem("studyVaultGems")===null) localStorage.setItem("studyVaultGems","0");
+  updateProfile();
+  closeAuth();
+}
+
+function setAuthMode(mode){
+  authMode=mode;
+  const signin=document.getElementById("signinTab");
+  const signup=document.getElementById("signupTab");
+  const nameField=document.getElementById("nameField");
+  const title=document.getElementById("authTitle");
+  const subtitle=document.getElementById("authSubtitle");
+  const submit=document.getElementById("authSubmit");
+  if(signin) signin.classList.toggle("active",mode==="signin");
+  if(signup) signup.classList.toggle("active",mode==="signup");
+  if(nameField) nameField.hidden=mode!=="signup";
+  if(title) title.textContent=mode==="signin"?"Welcome to StudyVault":"Create your StudyVault account";
+  if(subtitle) subtitle.textContent=mode==="signin"?"Sign in to save your K–12 learning progress and continue where you left off.":"Create an account to save your learning progress.";
+  if(submit) submit.textContent=mode==="signin"?"Sign in":"Create account";
+  const error=document.getElementById("authError");
+  if(error) error.textContent="";
+}
+function openAuth(mode="signin"){
+  if(typeof setAuthMode==="function") setAuthMode(mode);
+  if(window.SV) SV.showModal("authModal");
+}
+function closeAuth(e){ if(e) e.preventDefault(); if(window.SV) SV.hideModal("authModal"); }
+
+function resetLocalPassword(){
+  const user=getStoredUser();
+  const email=document.getElementById("emailInput").value.trim().toLowerCase();
+  const error=document.getElementById("authError");
+
+  if(!user){
+    error.textContent="No local account exists yet. Please create one.";
+    return;
+  }
+  if(!email || email!==String(user.email||"").toLowerCase()){
+    error.textContent="Enter the email address used for your account first.";
+    return;
+  }
+
+  const newPassword=prompt("Enter a new password (at least 6 characters):");
+  if(newPassword===null) return;
+  if(newPassword.length<6){
+    error.textContent="Password must be at least 6 characters.";
+    return;
+  }
+
+  user.password=newPassword;
+  localStorage.setItem("studyVaultUser",JSON.stringify(user));
+  error.textContent="Password updated. You can now sign in.";
+}
+
+
+document.addEventListener("click", function(e){
+  const ids=["authModal","domainModal","domainSetupModal","loginChoiceModal"];
+  ids.forEach(function(id){
+    const modal=document.getElementById(id);
+    if(modal && !modal.hidden && e.target===modal){
+      modal.hidden=true;
+    }
+  });
+});
+
+document.addEventListener("keydown", function(e){
+  if(e.key==="Escape"){
+    ["authModal","domainModal","domainSetupModal","loginChoiceModal"].forEach(function(id){
+      const modal=document.getElementById(id);
+      if(modal) modal.hidden=true;
+    });
+  }
+});
+
+function getStoredUser(){
+  try{
+    return JSON.parse(localStorage.getItem("studyVaultUser")||"null");
+  }catch(e){
+    return null;
+  }
+}
+
+function handleAuth(e){
+  if(e) e.preventDefault();
+
+  const emailInput=document.getElementById("emailInput");
+  const passwordInput=document.getElementById("passwordInput");
+  const nameInput=document.getElementById("nameInput");
+  const error=document.getElementById("authError");
+
+  const email=emailInput.value.trim().toLowerCase();
+  const password=passwordInput.value;
+  const name=nameInput.value.trim();
+  error.textContent="";
+
+  if(!email){
+    error.textContent="Please enter your email address.";
+    emailInput.focus();
+    return false;
+  }
+
+  if(password.length<6){
+    error.textContent="Password must be at least 6 characters.";
+    passwordInput.focus();
+    return false;
+  }
+
+  const stored=getStoredUser();
+
+  if(authMode==="signup"){
+    if(!name){
+      error.textContent="Please enter your name.";
+      nameInput.focus();
+      return false;
+    }
+
+    // An account is identified by email, not by password.
+    if(stored && stored.email && stored.email.toLowerCase()===email){
+      error.textContent="An account with this email already exists. Please sign in instead.";
+      return false;
+    }
+
+    localStorage.setItem("studyVaultUser",JSON.stringify({
+      name:name,
+      email:email,
+      password:password
+    }));
+    localStorage.setItem("studyVaultSignedIn","1");
+
+    if(localStorage.getItem("studyVaultEnergy")===null) localStorage.setItem("studyVaultEnergy","10");
+    if(localStorage.getItem("studyVaultGems")===null) localStorage.setItem("studyVaultGems","0");
+
+    updateProfile();
+    closeAuth();
+    return false;
+  }
+
+  // Sign-in checks BOTH email and password belonging to the same account.
+  if(!stored){
+    error.textContent="No account found. Please create an account first.";
+    return false;
+  }
+
+  const storedEmail=(stored.email||"").trim().toLowerCase();
+  const storedPassword=stored.password||"";
+
+  if(storedEmail!==email){
+    error.textContent="No account was found with that email.";
+    return false;
+  }
+
+  if(storedPassword!==password){
+    error.textContent="Incorrect password. Please try again.";
+    passwordInput.focus();
+    return false;
+  }
+
+  localStorage.setItem("studyVaultSignedIn","1");
+  if(localStorage.getItem("studyVaultEnergy")===null) localStorage.setItem("studyVaultEnergy","10");
+  if(localStorage.getItem("studyVaultGems")===null) localStorage.setItem("studyVaultGems","0");
+
+  updateProfile();
+  closeAuth();
+  return false;
+}
+function signOut(){
+  localStorage.removeItem("studyVaultSignedIn");
+  localStorage.removeItem("studyVaultGuest");
+  localStorage.removeItem("studyVaultAdmin");
+  localStorage.removeItem("studyVaultAdminName");
+  updateProfile();
+}
+
+
+function getGems(){
+  const saved=localStorage.getItem("studyVaultGems");
+  return saved===null?0:Math.max(0,Number(saved));
+}
+function setGems(value){
+  localStorage.setItem("studyVaultGems",String(Math.max(0,Number(value))));
+  updateGemsUI();
+}
+function updateGemsUI(){
+  const gems=getGems();
+  const count=document.getElementById("gemCount");
+  const button=document.getElementById("buyEnergyButton");
+  if(count) count.textContent=gems;
+  if(button) button.disabled=(gems<450 || getEnergy()>=10);
+}
+function completeLesson(name){
+  const before=getGems();
+  setGems(before+10);
+  document.getElementById("lessonMsg").textContent="✓ "+name+" completed! +10 💎 gems earned.";
+}
+function buyEnergy(){
+  const gems=getGems();
+  const energy=getEnergy();
+  const msg=document.getElementById("gemMessage");
+  if(energy>=10){msg.textContent="⚡ Your energy is already full.";return;}
+  if(gems<450){msg.textContent="💎 You need 450 gems to refill 10 energy.";return;}
+  setGems(gems-450);
+  setEnergy(10);
+  document.querySelectorAll(".quiz .choice").forEach(b=>b.classList.remove("quiz-locked"));
+  if(msg) msg.textContent="⚡ Energy refilled to 10! 450 💎 gems spent.";
+  const result=document.getElementById("result");
+  if(result) result.textContent="⚡ Energy restored. Keep learning!";
+}
+
+
+function getQuestionDay(){
+  return new Date().toISOString().slice(0,10);
+}
+function getDailyQuestions(){
+  const saved=JSON.parse(localStorage.getItem("studyVaultDailyQuestions")||"null");
+  const day=getQuestionDay();
+  if(!saved || saved.day!==day) return {day:day,count:0};
+  return saved;
+}
+function isUnlimitedLearning(){
+  const plan=localStorage.getItem("studyVaultPlan")||"Free";
+  return ["StudyVault Plus","StudyVault Pro","StudyVault Max"].includes(plan);
+}
+function canAnswerQuestion(){
+  if(isUnlimitedLearning()) return true;
+  return getDailyQuestions().count<10;
+}
+function recordQuestion(){
+  if(isUnlimitedLearning()) return;
+  const data=getDailyQuestions();
+  data.count++;
+  localStorage.setItem("studyVaultDailyQuestions",JSON.stringify(data));
+}
+function updateQuestionLimitUI(){
+  const el=document.getElementById("questionCounter");
+  if(!el) return;
+  if(isUnlimitedLearning()){
+    el.textContent="♾️ Unlimited questions";
+  }else{
+    const left=Math.max(0,10-getDailyQuestions().count);
+    el.textContent="📝 "+left+"/10 questions today";
+  }
+}
+
+
+function getPlan(){
+  return localStorage.getItem("studyVaultPlan")||"Free";
+}
+function isUnlimitedEnergy(){
+  return ["StudyVault Pro","StudyVault Max"].includes(getPlan());
+}
+function setPlan(plan){
+  localStorage.setItem("studyVaultPlan",plan);
+  updatePlanUI();
+}
+function updatePlanUI(){
+  const plan=getPlan();
+  const level=document.getElementById("profileLevel");
+  if(level && localStorage.getItem("studyVaultAdmin")!=="1"){
+    const guest=localStorage.getItem("studyVaultGuest")==="1";
+    level.textContent=guest?"Guest · "+plan:plan+" learner";
+  }
+  updateQuestionLimitUI();
+  updateGemsUI();
+}
+
+function getEnergy(){
+  const saved=localStorage.getItem("studyVaultEnergy");
+  return saved===null?10:Math.max(0,Math.min(10,Number(saved)));
+}
+function setEnergy(value){
+  const energy=Math.max(0,Math.min(10,Number(value)));
+  localStorage.setItem("studyVaultEnergy",String(energy));
+  updateEnergyUI();
+}
+function updateEnergyUI(){
+  const energy=getEnergy();
+  const count=document.getElementById("energyCount");
+  const progress=document.getElementById("progressEnergy");
+  const badge=document.querySelector(".energy-badge");
+  if(count) count.textContent=energy;
+  if(progress) progress.textContent=energy+" / 10 energy";
+  if(badge){
+    badge.classList.toggle("energy-empty",energy===0);
+    badge.classList.toggle("energy-warning",energy>0&&energy<=3);
+  }
+  updateGemsUI();
+}
+function lockQuizzes(){
+  document.querySelectorAll(".quiz .choice").forEach(b=>b.classList.add("quiz-locked"));
+}
+function resetEnergy(){
+  setEnergy(10);
+  document.querySelectorAll(".quiz .choice").forEach(b=>b.classList.remove("quiz-locked"));
+  const result=document.getElementById("result");
+  if(result) result.textContent="⚡ Energy restored to 10.";
+}
+updateEnergyUI();
+updatePlanUI();
+if(getEnergy()===0 && !isUnlimitedEnergy()) lockQuizzes();
+
+
+
+function chooseRegularLogin(){
+  const chooser=document.getElementById("loginChoiceModal");
+  if(chooser) chooser.hidden=true;
+
+  // Open the regular sign-in screen after the chooser has closed.
+  setTimeout(function(){
+    openLoginChoice();
+  }, 0);
+}
+
+function openLoginChoice(){
+  document.getElementById("loginChoiceModal").hidden=false;
+}
+function closeLoginChoice(e){ if(e) e.preventDefault(); if(window.SV) SV.hideModal("loginChoiceModal"); }
+
+function openDomainLogin(){
+  if(window.SV) SV.showModal("domainModal");
+  var input=document.getElementById("domainUsername");
+  if(input) input.focus();
+}
+function closeDomainLogin(e){ if(e) e.preventDefault(); if(window.SV) SV.hideModal("domainModal"); }
+function closeDomainSetup(e){ if(e) e.preventDefault(); if(window.SV) SV.hideModal("domainSetupModal"); }
+function saveDomainKey(e){
+  e.preventDefault();
+  const a=document.getElementById("newDomainKey").value;
+  const b=document.getElementById("confirmDomainKey").value;
+  const err=document.getElementById("domainSetupError");
+  if(a.length<8){err.textContent="Domain Key must be at least 8 characters.";return false;}
+  if(a!==b){err.textContent="The Domain Keys do not match.";return false;}
+  localStorage.setItem("studyVaultDomainKey",a);
+  closeDomainSetup();
+  openDomainLogin();
+  return false;
+}
+function getDomainKey(){
+  return localStorage.getItem("studyVaultDomainKey") || "";
+}
+
+function handleDomainLogin(e){
+  e.preventDefault();
+
+  const username=document.getElementById("domainUsername").value.trim();
+  const key=document.getElementById("domainKey").value.trim();
+  const error=document.getElementById("domainError");
+
+  if(username!=="Administrator"){
+    error.textContent='Username must be "Administrator".';
+    return false;
+  }
+
+  const validKey=getDomainKey();
+
+  if(!validKey){
+    error.textContent="No StudyVault Domain subscription key is configured for this prototype.";
+    return false;
+  }
+
+  if(key!==validKey){
+    error.textContent="Invalid StudyVault Domain Key.";
+    return false;
+  }
+
+  localStorage.setItem("studyVaultAdmin","1");
+  localStorage.setItem("studyVaultAdminName","Administrator");
+  localStorage.setItem("studyVaultSignedIn","1");
+  closeDomainLogin();
+  updateProfile();
+  return false;
+}
+function exitAdmin(){
+  localStorage.removeItem("studyVaultAdmin");
+  localStorage.removeItem("studyVaultAdminName");
+  updateProfile();
+}
+
+
+function updateTopSignInButton(){
+  const b=document.getElementById("topSignInButton");
+  if(!b) return;
+  const admin=localStorage.getItem("studyVaultAdmin")==="1";
+  const signed=localStorage.getItem("studyVaultSignedIn")==="1";
+  const guest=localStorage.getItem("studyVaultGuest")==="1";
+  if(admin){
+    b.textContent="Administrator";
+    b.onclick=function(){ openDomainLogin(); };
+  }else if(signed || guest){
+    b.textContent="Account";
+    b.onclick=function(){ openAuth("signin"); };
+  }else{
+    b.textContent="Sign in";
+    b.onclick=function(){ openLoginChoice(); };
+  }
+}
+
+function updateProfile(){
+  const user=getStoredUser();
+  const signed=localStorage.getItem("studyVaultSignedIn")==="1";
+  const admin=localStorage.getItem("studyVaultAdmin")==="1";
+  const guest=localStorage.getItem("studyVaultGuest")==="1";
+  const name=admin?"Administrator":(signed&&user?user.name:(guest?"Guest Learner":"Guest"));
+  const profileName=document.getElementById("profileName");
+  const profileLevel=document.getElementById("profileLevel");
+  const avatar=document.getElementById("avatar");
+  if(profileName) profileName.innerHTML=admin?'Administrator <span class="admin-badge">CREATOR</span>':name;
+  if(profileLevel) profileLevel.textContent=admin?"Administrator access":(guest?"Guest mode — progress saved on this browser":(signed?getPlan()+" learner":"Free learner"));
+  if(avatar) avatar.textContent=admin?"A":(signed?(name.charAt(0).toUpperCase()||"L"):"?");
+  updatePlanUI();
+}
+updateProfile();
+
+  updateTopSignInButton();
+function showSection(id,btn){
+  document.querySelectorAll('main section').forEach(s=>s.hidden=true);
+  document.getElementById(id).hidden=false;
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function answer(el,correct){
+  if(!canAnswerQuestion()){
+    document.getElementById('result').textContent="📝 You've used all 10 free questions for today. Come back tomorrow or upgrade for unlimited learning.";
+    return;
+  }
+
+  const energy=getEnergy();
+  document.querySelectorAll('.choice').forEach(b=>b.classList.remove('correct','wrong'));
+
+  if(energy<=0 && !isUnlimitedEnergy()){
+    document.getElementById('result').textContent="⚡ You're out of energy. Recharge before answering more questions.";
+    return;
+  }
+
+  recordQuestion();
+  el.classList.add(correct?'correct':'wrong');
+
+  if(correct){
+    document.getElementById('result').textContent='🎉 Correct! Great job.';
+  }else{
+    if(!isUnlimitedEnergy()){
+      const next=Math.max(0,energy-1);
+      setEnergy(next);
+      document.getElementById('result').textContent=next===0
+        ?"❌ Incorrect. You lost 1 energy. You're out of energy!"
+        :"❌ Incorrect. You lost 1 energy. "+next+" energy remaining.";
+      if(next===0) lockQuizzes();
+    }else{
+      document.getElementById('result').textContent='❌ Incorrect. Unlimited Energy protects you from energy loss.';
+    }
+  }
+  updateQuestionLimitUI();
+}
+function startLesson(msg){document.getElementById('lessonMsg').textContent='✓ '+msg;}
+</script>
+
+<script>
+(function(){
+  document.addEventListener("click",function(e){
+    var b=e.target.closest ? e.target.closest("button[onclick*='showSection']") : null;
+    if(!b) return;
+    var m=b.getAttribute("onclick").match(/showSection\('([^']+)'/);
+    if(!m) return;
+    var id=m[1], section=document.getElementById(id);
+    if(!section) return;
+    e.preventDefault();
+    document.querySelectorAll("section[id]").forEach(function(s){s.hidden=true;});
+    section.hidden=false;
+    document.querySelectorAll(".sidebar button").forEach(function(x){x.classList.remove("active");});
+    b.classList.add("active");
+  },true);
+})();
+</script>
+
+
+<script>
+(function(){
+  function startLevelFromButton(btn){
+    var card=btn.closest ? btn.closest(".level-card,.level,.course-card,.lesson-card") : null;
+    var subject=btn.getAttribute("data-subject") || (card && card.getAttribute("data-subject")) || "";
+    var level=btn.getAttribute("data-level") || (card && card.getAttribute("data-level")) || "";
+    var target=btn.getAttribute("data-target") || (card && card.getAttribute("data-target")) || "";
+
+    // If the page already has a course/lesson starter, use it.
+    if(typeof window.startLevel==="function" && window.startLevel!==startLevelFromButton){
+      try { window.startLevel(subject, level, target); return; } catch(e){}
+    }
+    if(typeof window.startLesson==="function"){
+      try { window.startLesson(subject, level, target); return; } catch(e){}
+    }
+
+    // Otherwise open the first available lesson/quiz section.
+    var quiz=document.getElementById("lesson") || document.getElementById("quiz") ||
+              document.getElementById("learn") || document.querySelector("[data-section='lesson']");
+    if(quiz){
+      document.querySelectorAll("section[id]").forEach(function(s){s.hidden=true;});
+      quiz.hidden=false;
+      quiz.scrollIntoView({behavior:"smooth",block:"start"});
+      return;
+    }
+
+    // Last-resort feedback instead of a dead button.
+    var result=document.getElementById("result");
+    if(result) result.textContent="Your level is ready to start.";
+  }
+
+  document.addEventListener("click",function(e){
+    var btn=e.target.closest ? e.target.closest(".start-level-btn") : null;
+    if(!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    startLevelFromButton(btn);
+  },true);
+})();
+</script>
+
+
+<script>
+(function(){
+  var studyQuestions=[
+    {subject:"Math",text:"What is 2 + 2?",choices:["3","4","5","6"],answer:1},
+    {subject:"English",text:"Which word is a noun?",choices:["Run","Blue","Teacher","Quickly"],answer:2},
+    {subject:"Coding",text:"Which symbol starts a JavaScript comment?",choices:["//","##","<>","**"],answer:0}
+  ];
+  window.studyQuestionIndex=0;
+  window.studyCurrentLevel={subject:"Math",level:"K"};
+
+  window.openStudyQuestions=function(subject,level){
+    window.studyCurrentLevel={subject:subject||"Math",level:level||"K"};
+    window.studyQuestionIndex=0;
+
+    document.querySelectorAll("section[id]").forEach(function(s){s.hidden=true;});
+    var page=document.getElementById("questionsPage") || document.getElementById("quiz") || document.getElementById("lesson");
+    if(!page){
+      alert("Questions page could not be found.");
+      return;
+    }
+    page.hidden=false;
+    var title=document.getElementById("questionsTitle");
+    var sub=document.getElementById("questionsSubtitle");
+    if(title) title.textContent=(subject||"Math")+" — Level "+(level||"K");
+    if(sub) sub.textContent="Answer the question to continue.";
+    renderStudyQuestion();
+    page.scrollIntoView({behavior:"smooth",block:"start"});
+  };
+
+  window.renderStudyQuestion=function(){
+    var q=studyQuestions[studyQuestionIndex % studyQuestions.length];
+    var n=document.getElementById("questionNumber");
+    var t=document.getElementById("questionText");
+    var choices=document.getElementById("answerChoices");
+    var result=document.getElementById("result");
+    if(n) n.textContent="Question "+(studyQuestionIndex+1);
+    if(t) t.textContent=q.text;
+    if(result) result.textContent="";
+    if(choices){
+      choices.innerHTML="";
+      q.choices.forEach(function(choice,i){
+        var b=document.createElement("button");
+        b.type="button";
+        b.className="choice";
+        b.textContent=choice;
+        b.onclick=function(){
+          var correct=i===q.answer;
+          if(typeof window.answer==="function"){
+            try{ window.answer(b,correct); return; }catch(e){}
+          }
+          b.classList.add(correct?"correct":"wrong");
+          if(result) result.textContent=correct?"🎉 Correct!":"❌ Incorrect.";
+        };
+        choices.appendChild(b);
+      });
+    }
+    if(typeof window.updateQuestionLimitUI==="function") updateQuestionLimitUI();
+  };
+
+  window.nextStudyQuestion=function(){
+    if(!window.canAnswerQuestion || window.canAnswerQuestion()){
+      window.studyQuestionIndex++;
+      renderStudyQuestion();
+    }
+  };
+
+  // Capture Start Level clicks before other handlers can swallow them.
+  document.addEventListener("click",function(e){
+    var btn=e.target.closest ? e.target.closest(".start-level-btn") : null;
+    if(!btn) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    var card=btn.closest(".level-card,.level,.course-card,.lesson-card,[data-level]");
+    var subject=btn.getAttribute("data-subject") || (card&&card.getAttribute("data-subject")) || "Math";
+    var level=btn.getAttribute("data-level") || (card&&card.getAttribute("data-level")) || "K";
+    openStudyQuestions(subject,level);
+  },true);
+})();
+</script>
+
+</body>
+</html>
