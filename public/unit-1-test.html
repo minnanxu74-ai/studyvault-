@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StudyVault | Kindergarten Math — Unit 1 Test</title>
+<style>
+:root{--bg:#071018;--glass:rgba(255,255,255,.075);--line:rgba(255,255,255,.13);--text:#f7fbff;--muted:#aeb9c8;--blue:#8eb8ff;--green:#8ee7c1;--gold:#ffd66b;--red:#ff9999}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,system-ui,sans-serif;background:radial-gradient(circle at 15% 5%,rgba(142,184,255,.16),transparent 30%),radial-gradient(circle at 85% 20%,rgba(142,231,193,.10),transparent 28%),var(--bg)}
+header{height:68px;position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:rgba(7,16,24,.72);backdrop-filter:blur(22px);border-bottom:1px solid var(--line)}
+.brand{font-weight:900}.brand span{color:var(--green)}
+.exit{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--text);font-size:28px;cursor:pointer}
+main{width:min(850px,calc(100% - 28px));margin:30px auto 70px}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:26px;backdrop-filter:blur(20px);box-shadow:0 24px 80px rgba(0,0,0,.28)}
+.hero{padding:30px;margin-bottom:18px}.eyebrow{text-transform:uppercase;letter-spacing:1.8px;color:var(--blue);font-size:11px;font-weight:850}
+h1{font-size:clamp(34px,6vw,55px);line-height:1;letter-spacing:-2px;margin:10px 0 12px}.subtitle{color:var(--muted);line-height:1.65}
+.progress-wrap{margin-top:22px}.progress-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:7px}.bar{height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}.bar i{display:block;width:0;height:100%;background:var(--green);transition:width .35s}
+.lesson{padding:28px}.lesson h2{font-size:27px;margin:0 0 10px}.lesson p{color:var(--muted);line-height:1.7}
+.example{margin:20px 0;padding:24px;border-radius:20px;background:rgba(255,255,255,.055);border:1px solid var(--line);text-align:center}
+.count-line{font-size:27px;font-weight:850;letter-spacing:5px;color:var(--gold);margin-top:10px}.note{font-size:13px;color:var(--muted)}
+.check{margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}.question{font-size:21px;font-weight:800;line-height:1.4;margin:10px 0 18px}
+.answers{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.answer{border:1px solid var(--line);background:rgba(255,255,255,.055);color:var(--text);border-radius:15px;padding:15px;font-size:16px;font-weight:750;cursor:pointer}.answer.correct{border-color:rgba(142,231,193,.8);background:rgba(142,231,193,.14)}.answer.wrong{border-color:rgba(255,153,153,.8);background:rgba(255,153,153,.12)}.answer:hover:not(:disabled){transform:translateY(-2px);border-color:rgba(142,184,255,.55)}
+.feedback{min-height:24px;margin-top:13px;font-size:13px}.good{color:var(--green)}.bad{color:var(--red)}
+.lesson-nav{display:flex;justify-content:space-between;gap:12px;margin-top:18px}.nav-btn{min-width:120px;border:1px solid var(--line);border-radius:14px;padding:12px 16px;background:rgba(255,255,255,.055);color:var(--text);font-weight:850;cursor:pointer}.nav-btn:disabled{opacity:.35;cursor:not-allowed}.next-btn{background:var(--blue);color:#071018;border-color:transparent}
+.complete{display:none;text-align:center;padding:30px;margin-top:18px}.badge{font-size:58px}.complete p{color:var(--muted)}.score{font-size:32px;font-weight:900;color:var(--gold)}.done{display:inline-block;margin-top:12px;padding:12px 18px;border-radius:12px;background:var(--green);color:#071018;text-decoration:none;font-weight:900}
+.quit-modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(10px)}.quit-modal.show{display:flex}.quit-box{width:min(420px,100%);padding:28px;border:1px solid var(--line);border-radius:24px;background:rgba(17,24,35,.96);text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.6)}.quit-icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;margin:auto;background:rgba(255,153,153,.1);color:var(--red);font-size:28px}.quit-box p{color:var(--muted);font-size:13px}.quit-actions{display:flex;gap:10px;margin-top:20px}.quit-actions button,.quit-actions a{flex:1;padding:12px;border-radius:12px;font-weight:850;text-decoration:none;cursor:pointer}.stay{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text)}.leave{background:var(--red);color:#180707}
+@media(max-width:600px){.answers{grid-template-columns:1fr}.hero,.lesson{padding:22px}.nav-btn{min-width:0;flex:1}}
+</style>
+</head>
+<body>
+<header><div class="brand">Study<span>Vault</span> • Kindergarten Math</div><button class="exit" type="button" onclick="requestQuit()" aria-label="Exit test">×</button></header>
+<main>
+<section class="glass hero">
+<div class="eyebrow">Unit 1 • Final Assessment</div>
+<h1>Unit 1 Test</h1>
+<p class="subtitle">Review everything you learned in Unit 1: counting up and down, counting by 2s, 5s, and 10s.</p>
+<div class="progress-wrap"><div class="progress-label"><span>Test progress</span><span id="progressText">0%</span></div><div class="bar"><i id="progressBar"></i></div></div>
+</section>
+
+<section class="glass lesson" id="testCard">
+<div id="teaching">
+<div class="eyebrow">Review first</div>
+<h2>🌟 Unit 1 Review</h2>
+<p>Before you begin, remember what you learned:</p>
+<div class="example">
+<div class="count-line">1 → 2 → 3 → 4</div>
+<div class="note"><strong>Counting up:</strong> numbers get bigger by 1.</div>
+</div>
+<div class="example">
+<div class="count-line">4 → 3 → 2 → 1</div>
+<div class="note"><strong>Counting down:</strong> numbers get smaller by 1.</div>
+</div>
+<div class="example">
+<div class="count-line">2 → 4 → 6 → 8</div>
+<div class="note"><strong>Counting up by 2:</strong> add 2 each time.</div>
+</div>
+<div class="example">
+<div class="count-line">10 → 8 → 6 → 4</div>
+<div class="note"><strong>Counting down by 2:</strong> take away 2 each time.</div>
+</div>
+<div class="example">
+<div class="count-line">5 → 10 → 15 → 20</div>
+<div class="note"><strong>Counting up by 5:</strong> add 5 each time.</div>
+</div>
+<div class="example">
+<div class="count-line">25 → 20 → 15 → 10</div>
+<div class="note"><strong>Counting down by 5:</strong> take away 5 each time.</div>
+</div>
+<div class="example">
+<div class="count-line">10 → 20 → 30 → 40</div>
+<div class="note"><strong>Counting up by 10:</strong> add 10 each time.</div>
+</div>
+<div class="example">
+<div class="count-line">50 → 40 → 30 → 20</div>
+<div class="note"><strong>Counting down by 10:</strong> take away 10 each time.</div>
+</div>
+<p>This test has <strong>20 questions</strong>. Take your time and use what you learned.</p>
+<button class="nav-btn next-btn" type="button" onclick="startTest()">Start Test →</button>
+</div>
+
+<div class="check" id="questionArea" style="display:none">
+<div class="eyebrow" id="questionLabel">Question 1 of 20</div>
+<div class="question" id="question"></div>
+<div class="answers" id="answers"></div>
+<div class="feedback" id="feedback"></div>
+<div class="lesson-nav">
+<button class="nav-btn" id="backQuestion" type="button" onclick="goBack()" disabled>←&nbsp; Back</button>
+<button class="nav-btn next-btn" id="nextQuestion" type="button" onclick="goNext()" disabled>Next&nbsp; →</button>
+</div>
+</div>
+</section>
+
+<section class="glass complete" id="complete">
+<div class="badge">🏆</div>
+<h2>Unit 1 Test Complete!</h2>
+<div class="score" id="scoreText"></div>
+<p>You reviewed counting up and down by 1, 2, 5, and 10.</p>
+<p><strong>+50 EXP</strong> &nbsp; • &nbsp; <strong>+10 Gems</strong></p>
+<a class="done" href="unit-1.html">Return to StudyVault Dashboard</a>
+</section>
+</main>
+
+<div class="quit-modal" id="quitModal">
+<div class="quit-box">
+<div class="quit-icon">×</div>
+<h2>Leave the test?</h2>
+<p>Your current test will not be marked complete.</p>
+<div class="quit-actions">
+<button class="stay" type="button" onclick="closeQuit()">Stay</button>
+<a class="leave" href="unit-1.html">Leave Test</a>
+</div>
+</div>
+</div>
+
+<script>
+"use strict";
+const questions=[{"q": "What number comes after 4?", "choices": ["3", "5", "6", "7"], "correct": "5"}, {"q": "What number comes before 7?", "choices": ["5", "6", "8", "9"], "correct": "6"}, {"q": "Count up: 3, 4, ___", "choices": ["4", "5", "6", "7"], "correct": "5"}, {"q": "Count down: 8, 7, ___", "choices": ["5", "6", "7", "9"], "correct": "6"}, {"q": "Count by 2: 2, 4, 6, ___", "choices": ["7", "8", "9", "10"], "correct": "8"}, {"q": "Count down by 2: 10, 8, ___", "choices": ["6", "7", "8", "9"], "correct": "6"}, {"q": "Count by 5: 5, 10, 15, ___", "choices": ["18", "20", "25", "30"], "correct": "20"}, {"q": "Count down by 5: 25, 20, ___", "choices": ["10", "15", "20", "30"], "correct": "15"}, {"q": "Count by 10: 10, 20, 30, ___", "choices": ["35", "40", "50", "60"], "correct": "40"}, {"q": "Count down by 10: 60, 50, 40, ___", "choices": ["20", "30", "40", "50"], "correct": "30"}, {"q": "Which number comes next? 2, 4, 6, 8, ___", "choices": ["9", "10", "11", "12"], "correct": "10"}, {"q": "Which number comes next? 10, 20, 30, 40, ___", "choices": ["45", "50", "60", "70"], "correct": "50"}, {"q": "Which number comes next? 30, 25, 20, 15, ___", "choices": ["5", "10", "15", "20"], "correct": "10"}, {"q": "Which number comes next? 40, 30, 20, 10, ___", "choices": ["0", "5", "10", "20"], "correct": "0"}, {"q": "Count up: 5, 6, 7, 8, ___", "choices": ["8", "9", "10", "11"], "correct": "9"}, {"q": "Count down: 12, 11, 10, ___", "choices": ["8", "9", "10", "11"], "correct": "9"}, {"q": "Count by 5: 10, 15, 20, 25, ___", "choices": ["25", "30", "35", "40"], "correct": "30"}, {"q": "Count down by 5: 40, 35, 30, 25, ___", "choices": ["15", "20", "25", "30"], "correct": "20"}, {"q": "Count by 10: 20, 30, 40, 50, ___", "choices": ["55", "60", "70", "80"], "correct": "60"}, {"q": "Count down by 10: 100, 90, 80, 70, ___", "choices": ["50", "60", "70", "80"], "correct": "60"}];
+let questionIndex=0,answered=false,score=0;
+
+function setProgress(v){
+  document.getElementById("progressBar").style.width=v+"%";
+  document.getElementById("progressText").textContent=v+"%";
+}
+
+function startTest(){
+  document.getElementById("teaching").style.display="none";
+  document.getElementById("questionArea").style.display="block";
+  questionIndex=0;
+  answered=false;
+  score=0;
+  setProgress(0);
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const item=questions[questionIndex];
+  const box=document.getElementById("answers");
+  const f=document.getElementById("feedback");
+  document.getElementById("questionLabel").textContent="Question "+(questionIndex+1)+" of "+questions.length;
+  document.getElementById("question").textContent=item.q;
+  box.innerHTML="";
+  f.textContent="";
+  f.className="feedback";
+
+  [...item.choices].sort(()=>Math.random()-.5).forEach(value=>{
+    const b=document.createElement("button");
+    b.type="button";
+    b.className="answer";
+    b.textContent=value;
+    b.onclick=()=>checkAnswer(b,value);
+    box.appendChild(b);
+  });
+
+  document.getElementById("backQuestion").disabled=questionIndex===0;
+  document.getElementById("nextQuestion").disabled=!answered;
+}
+
+function checkAnswer(button,value){
+  if(answered)return;
+  const f=document.getElementById("feedback");
+
+  if(value===questions[questionIndex].correct){
+    answered=true;
+    score++;
+    document.querySelectorAll(".answer").forEach(b=>b.disabled=true);
+    button.classList.add("correct");
+    f.textContent="✨ Correct! You can continue.";
+    f.className="feedback good";
+    setProgress(Math.round(((questionIndex+1)/questions.length)*100));
+    document.getElementById("nextQuestion").disabled=false;
+  }else{
+    button.classList.add("wrong");
+    f.textContent="Not quite. Think about the counting pattern and try again.";
+    f.className="feedback bad";
+    setTimeout(()=>button.classList.remove("wrong"),500);
+  }
+}
+
+function goBack(){
+  if(questionIndex===0)return;
+  questionIndex--;
+  answered=false;
+  setProgress(Math.round((questionIndex/questions.length)*100));
+  renderQuestion();
+}
+
+function goNext(){
+  if(!answered)return;
+  if(questionIndex<questions.length-1){
+    questionIndex++;
+    answered=false;
+    setProgress(Math.round((questionIndex/questions.length)*100));
+    renderQuestion();
+  }else{
+    finishTest();
+  }
+}
+
+function finishTest(){
+  localStorage.setItem("studyvault_kindergarten_math_unit_1_test","complete");
+  document.getElementById("testCard").style.display="none";
+  document.getElementById("complete").style.display="block";
+  document.getElementById("scoreText").textContent="Score: "+score+" / "+questions.length;
+  setProgress(100);
+  closeQuit();
+}
+
+function requestQuit(){document.getElementById("quitModal").classList.add("show");}
+function closeQuit(){document.getElementById("quitModal").classList.remove("show");}
+
+document.getElementById("quitModal").addEventListener("click",e=>{
+  if(e.target.id==="quitModal")closeQuit();
+});
+</script>
+</body>
+</html>
